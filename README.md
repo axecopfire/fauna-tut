@@ -1,3 +1,7 @@
+# Bootstrapped from below tutorial
+
+https://github.com/netlify/netlify-faunadb-example
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

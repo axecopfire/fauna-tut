@@ -7,7 +7,16 @@ const client = new faunadb.Client({
 });
 
 exports.handler = (event, context, callback) => {
-  const data = JSON.parse(event.body);
+  console.log("Hello? lambda");
+  let body = event.body;
+  console.log({ event });
+  if (event.isBase64Encoded) {
+    body = Buffer.from(event.body, "base64").toString();
+    // body = body.toString();
+    console.log("isBase64Encoded");
+  }
+  console.log({ body, context });
+  const data = JSON.parse(body);
   const id = getId(event.path);
   console.log(`Function 'todo-update' invoked. update id: ${id}`);
   return client
