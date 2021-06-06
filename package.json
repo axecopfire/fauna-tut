@@ -3,19 +3,33 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@analytics/google-analytics": "^0.5.3",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "analytics": "^0.7.5",
+    "chalk": "^4.1.1",
+    "faunadb": "^4.3.0",
+    "http-proxy-middleware": "^2.0.0",
+    "markdown-magic": "^2.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "👇 ABOUT-bootstrap-command": "💡 scaffold and setup FaunaDB #",
+    "bootstrap": "node ./scripts/bootstrap-fauna-database.js",
+    "👇 ABOUT-start-command": "💡 start the app and server #",
+    "start": "npm-run-all --parallel start:app start:server",
+    "start:app": "react-scripts start",
+    "start:server": "netlify-lambda serve functions -c ./webpack.config.js",
+    "👇 ABOUT-prebuild-command": "💡 before 'build' runs, run the 'bootstrap' command #",
+    "prebuild": "echo 'setup faunaDB' && npm run bootstrap",
+    "👇 ABOUT-build-command": "💡 build the react app and the serverless functions #",
+    "build": "npm-run-all --parallel build:**",
+    "build:app": "react-scripts build",
+    "build:functions": "netlify-lambda build functions -c ./webpack.config.js"
   },
   "eslintConfig": {
     "extends": [
@@ -34,5 +48,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "netlify-lambda": "^2.0.8",
+    "npm-run-all": "^4.1.5"
   }
 }
